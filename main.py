@@ -18,7 +18,7 @@ delay_duration = {"a1.mp3": 0.6319047619047619,
                   }
 
 
-discord.opus.load_opus()
+discord.opus.load_opus("opus")
 if not discord.opus.is_loaded():
     raise RuntimeError('Opus failed to load')
 
