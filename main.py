@@ -39,7 +39,7 @@ async def join(ctx):
         channel = ctx.message.author.voice.channel
     except AttributeError:
         await ctx.send(f"{ctx.message.author.mention} join voice, you dum dum")
-        return False
+        return
 
     voice = get(bot.voice_clients, guild=ctx.guild)
 
@@ -50,30 +50,28 @@ async def join(ctx):
 
 
 async def leave(ctx):
-    channel = ctx.message.author.voice.channel
+    # channel = ctx.message.author.voice.channel
     voice = get(bot.voice_clients, guild=ctx.guild)
 
     if voice and voice.is_connected():
         await voice.disconnect()
-        print(f"The bot has left {channel}")
+        # print(f"The bot has left {channel}")
     else:
-        print("Bot was told to leave voice channel, but was not in one")
+        # print("Bot was told to leave voice channel, but was not in one")
+        pass
 
 
 @bot.command(pass_context=True, aliases=['mw', 'mcw'])
 @commands.cooldown(1, 2.5, commands.BucketType.guild)
 async def microwave(ctx):
-    global microwave_counter
-    joined = await join(ctx)
-    if not joined:
-        return
+    await join(ctx)
 
     voice = get(bot.voice_clients, guild=ctx.guild)
-
+    if voice is None:
+        return
     audio_file = next(cycled_audio)
 
-    voice.play(discord.FFmpegPCMAudio(audio_file),
-               after=lambda e: print("Song done!"))
+    voice.play(discord.FFmpegPCMAudio(audio_file))
     voice.source = discord.PCMVolumeTransformer(voice.source)
     voice.source.volume = 0.4
 
@@ -81,7 +79,6 @@ async def microwave(ctx):
 
     await voice.disconnect()
 
-# 2.072380952380952 last file
 
 if __name__ == "__main__":
     bot.run(TOKEN)
