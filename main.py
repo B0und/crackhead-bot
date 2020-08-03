@@ -38,7 +38,7 @@ async def join(ctx):
     try:
         channel = ctx.message.author.voice.channel
     except AttributeError:
-        await ctx.send(f"{ctx.message.author.mention} join voice, you dum dum")
+        await ctx.send(f"{ctx.message.author.mention} JOIN VOICE CHANNEL, you dum dum")
         return
 
     voice = get(bot.voice_clients, guild=ctx.guild)
