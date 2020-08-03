@@ -39,7 +39,7 @@ async def join(ctx):
         channel = ctx.message.author.voice.channel
     except AttributeError:
         await ctx.send(f"{ctx.message.author.mention} join voice, you dum dum")
-        return
+        return False
 
     voice = get(bot.voice_clients, guild=ctx.guild)
 
@@ -64,7 +64,9 @@ async def leave(ctx):
 @commands.cooldown(1, 2.5, commands.BucketType.guild)
 async def microwave(ctx):
     global microwave_counter
-    await join(ctx)
+    joined = await join(ctx)
+    if not joined:
+        return
 
     voice = get(bot.voice_clients, guild=ctx.guild)
 
