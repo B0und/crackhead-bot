@@ -5,8 +5,10 @@ import asyncio
 from itertools import cycle
 import os
 from dotenv import load_dotenv
-from sys import platform
 
+import platform
+
+print(f"Running on: {platform.sys.version}")
 
 load_dotenv()
 TOKEN = os.environ['TOKEN']
@@ -21,10 +23,6 @@ delay_duration = {"a1.mp3": 0.6319047619047619,
                   "a3.mp3": 2.072380952380952,
                   }
 
-# if platform == 'linux':
-#     discord.opus.load_opus("opus")
-#     if not discord.opus.is_loaded():
-#         raise RuntimeError('Opus failed to load')
 
 
 @bot.event
