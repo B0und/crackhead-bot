@@ -10,6 +10,8 @@ import platform
 
 print(f"Running on: {platform.sys.version}")
 
+# new change !!!
+
 load_dotenv()
 TOKEN = os.environ['TOKEN']
 BOT_PREFIX = '!'
