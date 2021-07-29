@@ -5,8 +5,10 @@ import asyncio
 from itertools import cycle
 import os
 from dotenv import load_dotenv
-
+import time
 import platform
+
+time.sleep(10)
 
 print(f"Running on: {platform.sys.version}")
 
